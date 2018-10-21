@@ -1,0 +1,63 @@
+<!--/*@thymesVar id="coursesList" type="java.util.List<com.geekbrains.entities.Course>"*/-->
+
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Courses List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/js/main.js}"></script>
+    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/resources/css/main.css}"/>
+</head>
+
+<body>
+<div class="container">
+    <h1>Courses List</h1>
+    <table class="table">
+        <thead>
+        <tr class="thead-dark">
+            <td>Id</td>
+            <td>Title</td>
+            <td>Info</td>
+            <td>Actions</td>
+            <td>Check Name</td>
+        </tr>
+        </thead>
+
+        <tr th:each="course : ${coursesList}">
+            <td th:text="${course.id}"/>
+            <td th:text="${course.title}"/>
+            <!--<td th:text="${student.courses}"/>-->
+            <td th:text="${course.title.length()}"/>
+            <td>
+                <button class="btn btn-primary removeBtn" th:attr="entryIndex=${couse.id}">Remove</button>
+                <a class="btn btn-danger" th:href="'/courses/remove/' + ${course.id}" role="button">Remove</a>
+            </td>
+            <td>
+
+                <p th:if="${course.title.length()} &gt; 3">
+                    Normal
+                </p>
+                <p class="p-3 mb-2 bg-danger text-white" th:unless="${course.title.length()} &gt; 3">
+                    To short
+                </p>
+            </td>
+
+        </tr>
+    </table>
+    <br>
+    <a href="/">Back To Main Page</a>
+    <br>
+    <button id="consoleTestBtn" >Console</button>
+    <input id="myInput" />
+</div>
+</body>
+<footer>
+    <div th:insert="~{my-footer :: foot}">
+    </div>
+</footer>
+</html>
